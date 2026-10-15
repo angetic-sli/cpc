@@ -1,0 +1,7 @@
+@extends('admin.layout')
+@section('title','Tableau de bord — CPC')
+@section('content')
+<div class="admin-heading"><div><p class="eyebrow">APERÇU DE L'ACTIVITÉ</p><h1>Tableau de bord</h1></div><a href="{{ route('admin.produits.create') }}" class="btn btn-dark">+ Ajouter un produit</a></div>
+<div class="stats-grid"><div class="stat-card"><span>Produits</span><strong>{{ $products }}</strong><small>Catalogue</small></div><div class="stat-card"><span>Commandes</span><strong>{{ $orders }}</strong><small>Toutes périodes</small></div><div class="stat-card"><span>Clients & utilisateurs</span><strong>{{ $users }}</strong><small>Comptes enregistrés</small></div><div class="stat-card"><span>Chiffre d'affaires payé</span><strong>{{ number_format($revenue,0,',',' ') }}</strong><small>FCFA</small></div></div>
+<div class="admin-panel"><div class="panel-heading"><h2>Commandes récentes</h2><a href="{{ route('admin.orders.index') }}">Voir tout ↗</a></div><div class="table-scroll"><table><thead><tr><th>Référence</th><th>Client</th><th>Date</th><th>Total</th><th>Statut</th><th></th></tr></thead><tbody>@forelse($recentOrders as $order)<tr><td>{{ $order->number }}</td><td>{{ $order->customer_name }}</td><td>{{ $order->created_at->format('d/m/Y') }}</td><td>{{ number_format($order->total,0,',',' ') }} FCFA</td><td><span class="status">{{ $order->status }}</span></td><td><a href="{{ route('admin.orders.show',$order) }}">Détails</a></td></tr>@empty<tr><td colspan="6">Aucune commande pour le moment.</td></tr>@endforelse</tbody></table></div></div>
+@endsection

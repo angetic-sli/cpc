@@ -1,0 +1,6 @@
+@extends('layouts.app')
+@section('title',isset($category)?$category->name.' — CPC':'Bazar en ligne — CPC')
+@section('content')
+<section class="page-hero"><p class="eyebrow">LE BAZAR EN LIGNE</p><h1>{{ isset($category)?$category->name:'Tous les articles' }}</h1><p>Découvrez des articles de toutes catégories : mode, maison, électronique, beauté, accessoires, loisirs et plus encore.</p></section>
+<section class="section shop-layout"><aside class="shop-sidebar"><h3>Catégories</h3><a href="{{ route('shop') }}">Tout voir</a>@foreach($categories as $cat)<a href="{{ route('category.show',$cat) }}">{{ $cat->name }}</a>@endforeach</aside><div class="shop-results"><div class="results-top"><span>{{ $products->total() }} résultat(s)</span><form method="GET" action="{{ route('shop') }}"><input name="q" placeholder="Rechercher un article" value="{{ request('q') }}"><button class="btn btn-dark btn-small">Rechercher</button></form></div><div class="product-grid">@forelse($products as $product) @include('store.partials.product-card',['product'=>$product]) @empty <p>Aucun produit ne correspond à votre recherche.</p> @endforelse</div><div class="pagination">{{ $products->links() }}</div></div></section>
+@endsection

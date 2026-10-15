@@ -1,0 +1,5 @@
+@extends('admin.layout')
+@section('title','Utilisateurs — CPC')
+@section('content')
+<div class="admin-heading"><div><p class="eyebrow">COMPTES ET ACCÈS</p><h1>Utilisateurs</h1></div></div><div class="admin-panel"><div class="table-scroll"><table><thead><tr><th>Nom</th><th>Email</th><th>Inscription</th><th>Rôle</th><th>Modifier le rôle</th></tr></thead><tbody>@foreach($users as $u)<tr><td>{{ $u->name }}</td><td>{{ $u->email }}</td><td>{{ $u->created_at->format('d/m/Y') }}</td><td>{{ $u->roles->pluck('label')->join(', ') ?: 'Aucun' }}</td><td>@if($u->id!==auth()->id())<form method="POST" action="{{ route('admin.users.role',$u) }}" class="inline-form">@csrf @method('PATCH')<select name="role_id">@foreach($roles as $role)<option value="{{ $role->id }}" @selected($u->roles->contains('id',$role->id))>{{ $role->label }}</option>@endforeach</select><button class="btn btn-dark btn-small">Appliquer</button></form>@else Votre compte @endif</td></tr>@endforeach</tbody></table></div>{{ $users->links() }}</div>
+@endsection

@@ -1,0 +1,8 @@
+/vendor
+/node_modules
+/.env
+/storage/*.key
+/public/hot
+/public/storage
+*.log
+.DS_Store

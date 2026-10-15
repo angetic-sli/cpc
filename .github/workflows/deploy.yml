@@ -1,0 +1,57 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 📥 Récupérer le code
+      - uses: actions/checkout@v3
+
+      # 🐘 Setup PHP
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+
+      # 📦 Installer dépendances
+      - name: Install dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      # ⚡ Optimisation Laravel (optionnel mais recommandé)
+      - name: Optimize Laravel
+        run: |
+          php artisan config:cache || true
+          php artisan route:cache || true
+          php artisan view:cache || true
+
+      # 🔥 TRÈS IMPORTANT : copier /public → racine
+      - name: Prepare public root
+        run: |
+          cp -r public/* .
+          cp public/.htaccess . || true
+
+      # 🚀 Déploiement FTP
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          local-dir: ./
+          server-dir: /
+          exclude: |
+            **/.git*/**
+            **/node_modules/**
+            .env
+            /storage/logs/**
+            /storage/framework/cache/**
+            /storage/framework/sessions/**
+            /storage/framework/views/**
+            /tests/**
+            .github/**
+            .vscode/**

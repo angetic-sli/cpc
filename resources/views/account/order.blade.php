@@ -1,0 +1,5 @@
+@extends('layouts.app')
+@section('title','Commande '.$order->number.' — CPC')
+@section('content')
+<section class="page-hero"><p class="eyebrow">SUIVI DE COMMANDE</p><h1>{{ $order->number }}</h1><p>Commande du {{ $order->created_at->format('d/m/Y à H:i') }}</p></section><section class="section"><div class="order-detail"><div><h2>Articles commandés</h2>@foreach($order->items as $item)<div class="order-item"><span>{{ $item->product_name }} × {{ $item->quantity }}</span><strong>{{ number_format($item->line_total,0,',',' ') }} FCFA</strong></div>@endforeach<hr><div class="order-item"><strong>Total</strong><strong>{{ number_format($order->total,0,',',' ') }} FCFA</strong></div></div><div><h2>Livraison</h2><p>{{ $order->customer_name }}</p><p>{{ $order->customer_phone }}</p><p>{{ $order->shipping_address }}</p><p>Zone : {{ $order->shipping_zone ?: '—' }}</p><p>Transporteur : {{ $order->carrier ?: 'À définir' }}</p><p>Numéro de suivi : <strong>{{ $order->tracking_number ?: 'Pas encore disponible' }}</strong></p><p>Statut : <strong>{{ $order->status }}</strong></p><p>Paiement : <strong>{{ $order->payment_status }}</strong></p></div></div></section>
+@endsection
