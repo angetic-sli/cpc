@@ -2,10 +2,10 @@ INSTALLATION RAPIDE — WINDOWS
 
 Prérequis : PHP 8.2+, Composer, Node.js LTS, MySQL/MariaDB.
 
-1. Créez la base de données `sadja` dans phpMyAdmin.
+1. Créez la base de données `CPC` dans phpMyAdmin.
 2. Dans un terminal :
-   composer create-project laravel/laravel sadja
-3. Décompressez cette archive et copiez/mergez les dossiers app, bootstrap, database, public, resources, routes et le fichier .env.example à la racine de sadja.
+   composer create-project laravel/laravel CPC
+3. Décompressez cette archive et copiez/mergez les dossiers app, bootstrap, database, public, resources, routes et le fichier .env.example à la racine de CPC.
 4. Configurez le fichier .env avec les paramètres MySQL locaux.
 5. Exécutez :
    composer install
@@ -17,5 +17,5 @@ Prérequis : PHP 8.2+, Composer, Node.js LTS, MySQL/MariaDB.
    php artisan serve
 6. Ouvrez http://127.0.0.1:8000
 
-Admin de démonstration : admin@sadja.local / ChangeMe123!
+Admin de démonstration : admin@CPC.local / ChangeMe123!
 Changez le mot de passe avant tout déploiement public.

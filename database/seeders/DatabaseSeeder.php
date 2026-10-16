@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder {
   $admin=Role::firstOrCreate(['name'=>'admin'],['label'=>'Administrateur']);$manager=Role::firstOrCreate(['name'=>'manager'],['label'=>'Gestionnaire']);$client=Role::firstOrCreate(['name'=>'client'],['label'=>'Client']);
   $admin->permissions()->sync(collect($perms)->pluck('id'));
   $manager->permissions()->sync([$perms['access-admin']->id,$perms['manage-products']->id,$perms['manage-orders']->id]);
-  $u=User::firstOrCreate(['email'=>'admin@sadja.local'],['name'=>'Administrateur SADJA','password'=>Hash::make('ChangeMe123!')]);$u->roles()->syncWithoutDetaching([$admin->id]);
+  $u=User::firstOrCreate(['email'=>'admin@CPC.local'],['name'=>'Administrateur CPC','password'=>Hash::make('ChangeMe123!')]);$u->roles()->syncWithoutDetaching([$admin->id]);
   foreach(['Nouveautés','Homme','Femme','Accessoires'] as $name)Category::firstOrCreate(['slug'=>\Illuminate\Support\Str::slug($name)],['name'=>$name,'is_active'=>true]);
   $finePermissions = [
    'products.view'=>'Voir les produits','products.create'=>'Créer les produits','products.update'=>'Modifier les produits','products.delete'=>'Supprimer les produits',

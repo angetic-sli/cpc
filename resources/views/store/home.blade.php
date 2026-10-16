@@ -1,7 +1,16 @@
 @extends('layouts.app')
 @section('title','CPC – Centrale Pluriel Connexion | Grand bazar en ligne')
 @section('content')
-<section class="hero-carousel" aria-label="Grand bazar CPC" data-carousel>
+<section class="home-hero-layout" aria-label="Découvrir CPC">
+ <aside class="home-hero-categories" aria-label="Catégories de produits">
+  <h2>Catégories</h2>
+  <a href="{{ route('shop') }}">✦ Tous les produits <span>›</span></a>
+  @foreach($categories->take(9) as $heroCategory)
+   <a href="{{ route('category.show',$heroCategory) }}">{{ $heroCategory->name }} <span>›</span></a>
+  @endforeach
+  <a class="hero-all-categories" href="{{ route('shop') }}">Voir toutes les catégories →</a>
+ </aside>
+ <section class="hero-carousel" aria-label="Offres à la une CPC" data-carousel>
  <div class="hero-slides">
  @forelse($slides as $i=>$slide)
   <article class="hero-slide {{ $i===0 ? 'is-active' : '' }}" data-slide="{{ $i }}" aria-hidden="{{ $i===0 ? 'false' : 'true' }}">
@@ -15,6 +24,11 @@
  </div>
  @if(count($slides)>1)<div class="carousel-controls"><div class="carousel-dots" role="tablist" aria-label="Choisir une diapositive">@foreach($slides as $i=>$slide)<button class="carousel-dot {{ $i===0 ? 'is-active' : '' }}" type="button" aria-label="Diapositive {{ $i+1 }}" aria-selected="{{ $i===0 ? 'true' : 'false' }}" data-go="{{ $i }}"><span></span></button>@endforeach</div><div class="carousel-arrows"><button type="button" data-prev aria-label="Diapositive précédente">←</button><button type="button" data-next aria-label="Diapositive suivante">→</button></div><span class="carousel-counter"><b data-current>01</b> <span>/</span> {{ str_pad((string)count($slides),2,'0',STR_PAD_LEFT) }}</span></div>@endif
  <div class="hero-brand-mark"><img src="{{ asset('images/cpc-logo.png') }}" alt="CPC – Centrale Pluriel Connexion"></div>
+</section>
+ <aside class="home-hero-promos" aria-label="Découvertes CPC">
+  <a class="hero-promo-card hero-promo-gold" href="{{ route('shop') }}"><span>À DÉCOUVRIR</span><strong>Les bonnes<br>trouvailles</strong><small>Pour tous les budgets ↗</small><i>✦</i></a>
+  <a class="hero-promo-card hero-promo-blue" href="{{ route('shop') }}?sort=latest"><span>NOUVEAUTÉS</span><strong>Les arrivages<br>du moment</strong><small>Voir les nouveautés ↗</small><i>✧</i></a>
+ </aside>
 </section>
 @foreach($ads as $ad) @if(($ad['placement'] ?? '')==='home_top')<a class="site-ad-banner" href="{{ $ad['url'] }}" target="_blank" rel="noopener sponsored">@if(!empty($ad['image']))<img src="{{ str_starts_with($ad['image'],'http') ? $ad['image'] : \Illuminate\Support\Facades\Storage::url($ad['image']) }}" alt="{{ $ad['title'] }}">@endif<div><small>PUBLICITÉ</small><strong>{{ $ad['title'] }}</strong><span>{{ $ad['text'] ?? '' }} ↗</span></div></a>@endif @endforeach
 <section class="trust-strip"><span>✳ Un large choix d’articles</span><span>✳ Des prix pour tous les budgets</span><span>✳ Commande simple et rapide</span><span>✳ Livraison selon votre zone</span></section>

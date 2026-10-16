@@ -7,9 +7,9 @@
  <meta name="description" content="@yield('meta_description', 'CPC — Centrale Pluriel Connexion : découvrez nos produits et commandez en ligne.')">
  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
- @php($siteTheme = \App\Models\StoreSetting::getValue('site_theme', ['primary'=>'#D9A441','secondary'=>'#17365D','background'=>'#F6F8FB','text'=>'#1E293B','surface'=>'#FFFFFF']))
- <link rel="stylesheet" href="{{ asset('css/sadja.css') }}">
- <style>:root{--accent:{{ $siteTheme['primary'] ?? '#D9A441' }};--gold:{{ $siteTheme['primary'] ?? '#D9A441' }};--gold-light:{{ $siteTheme['primary'] ?? '#D9A441' }};--ink:{{ $siteTheme['secondary'] ?? '#17365D' }};--paper:{{ $siteTheme['background'] ?? '#F6F8FB' }};--white:{{ $siteTheme['surface'] ?? '#FFFFFF' }};--surface:{{ $siteTheme['surface'] ?? '#FFFFFF' }};--text:{{ $siteTheme['text'] ?? '#1E293B' }};--primary:{{ $siteTheme['primary'] ?? '#D9A441' }}}body{background:var(--paper);color:var(--text)}.slide-cta,.carousel-arrows button:hover{background:var(--primary)}.site-ad-banner{display:flex;align-items:center;gap:24px;margin:24px 3%;padding:18px 24px;background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:24px;overflow:hidden}.site-ad-banner img{width:180px;height:100px;object-fit:cover;border-radius:16px}.site-ad-banner small{display:block;color:var(--primary);font-size:10px;letter-spacing:.18em}.site-ad-banner strong{display:block;font:26px var(--serif)}.site-ad-banner span{font-size:12px}@media(max-width:600px){.site-ad-banner{gap:12px;padding:12px}.site-ad-banner img{width:95px;height:85px}.site-ad-banner strong{font-size:18px}}</style>
+ @php($siteTheme = \App\Models\StoreSetting::getValue('site_theme', ['primary'=>'#0756D8','secondary'=>'#073B91','background'=>'#F3F7FD','text'=>'#073B91','surface'=>'#FFFFFF']))
+ <link rel="stylesheet" href="{{ asset('css/CPC.css') }}">
+ <style>:root{--accent:{{ $siteTheme['primary'] ?? '#0756D8' }};--gold:{{ $siteTheme['primary'] ?? '#0756D8' }};--gold-light:{{ $siteTheme['primary'] ?? '#0756D8' }};--ink:{{ $siteTheme['secondary'] ?? '#073B91' }};--paper:{{ $siteTheme['background'] ?? '#F6F8FB' }};--white:{{ $siteTheme['surface'] ?? '#FFFFFF' }};--surface:{{ $siteTheme['surface'] ?? '#FFFFFF' }};--text:{{ $siteTheme['text'] ?? '#1E293B' }};--primary:{{ $siteTheme['primary'] ?? '#0756D8' }}}body{background:var(--paper);color:var(--text)}.slide-cta,.carousel-arrows button:hover{background:var(--primary)}.site-ad-banner{display:flex;align-items:center;gap:24px;margin:24px 3%;padding:18px 24px;background:var(--surface);border:1px solid rgba(0,0,0,.08);border-radius:24px;overflow:hidden}.site-ad-banner img{width:180px;height:100px;object-fit:cover;border-radius:16px}.site-ad-banner small{display:block;color:var(--primary);font-size:10px;letter-spacing:.18em}.site-ad-banner strong{display:block;font:26px var(--serif)}.site-ad-banner span{font-size:12px}@media(max-width:600px){.site-ad-banner{gap:12px;padding:12px}.site-ad-banner img{width:95px;height:85px}.site-ad-banner strong{font-size:18px}}</style>
  @stack('styles')
 </head>
 <body>
@@ -26,6 +26,13 @@
    @auth <a href="{{ route('account') }}" class="icon-link">Mon compte</a>@else <a href="{{ route('login') }}" class="icon-link">Connexion</a>@endauth
   </div>
  </header>
+ <nav class="market-category-nav" aria-label="Catégories populaires">
+  <a href="{{ route('shop') }}">Tous les produits</a>
+  @foreach(\App\Models\Category::query()->orderBy('name')->limit(10)->get() as $navCategory)
+   <a href="{{ route('category.show', $navCategory) }}">{{ $navCategory->name }}</a>
+  @endforeach
+  <a href="{{ route('shop') }}?sort=latest">Nouveautés</a>
+ </nav>
  @if(request()->routeIs('shop','category.show'))
  @php($layoutAds = \App\Models\StoreSetting::getValue('site_ads', []))
  @foreach($layoutAds as $layoutAd)
@@ -45,5 +52,5 @@
   <div><h4>Contact</h4><p>Une question sur un article ou une commande ? Contactez-nous.</p><form class="newsletter" onsubmit="event.preventDefault(); alert('La newsletter sera activée après configuration du service email.');"><input type="email" required placeholder="Votre adresse email"><button type="submit">OK</button></form></div></div>
   <div class="footer-bottom"><span>© {{ date('Y') }} CPC. Tous droits réservés.</span><span>Mentions légales · Confidentialité · Conditions de vente</span></div>
  </footer>
- <script src="{{ asset('js/sadja.js') }}" defer></script>@stack('scripts')
+ <script src="{{ asset('js/CPC.js') }}" defer></script>@stack('scripts')
 </body></html>

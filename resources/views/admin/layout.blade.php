@@ -3,16 +3,16 @@
 <head>
  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="csrf-token" content="{{ csrf_token() }}"><title>@yield('title','Administration CPC')</title>
- <link rel="stylesheet" href="{{ asset('css/sadja.css') }}">
-</head>
+ <link rel="stylesheet" href="{{ asset('css/CPC.css') }}">
+<style>:root{--ink:#073B91;--accent:#0756D8;--gold:#0756D8;--admin:#073B91} .admin-sidebar,.admin-topbar{background:#073B91!important;border-color:transparent!important}.admin-nav-link.active{border-color:transparent!important;background:rgba(255,255,255,.16)!important;color:#fff!important}</style></head>
 <body class="admin-body">
  <aside class="admin-sidebar" id="adminSidebar">
   <a class="admin-brand" href="{{ route('admin.dashboard') }}"><img src="{{ asset('images/cpc-logo.png') }}" alt="CPC Compagnie"><span>ESPACE ADMIN</span></a>
   <p class="admin-label">PILOTAGE</p>
   <a class="admin-nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"><span class="admin-nav-icon">▦</span><span>Tableau de bord</span></a>
   <p class="admin-label">GESTION DES SERVICES</p>
-  <a class="admin-nav-link {{ request()->routeIs('admin.produits.*') ? 'active' : '' }}" href="{{ route('admin.produits.index') }}"><span class="admin-nav-icon">◇</span><span>Offres et services</span></a>
-  <a class="admin-nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}"><span class="admin-nav-icon">▤</span><span>Catégories de services</span></a>
+  <a class="admin-nav-link {{ request()->routeIs('admin.produits.*') ? 'active' : '' }}" href="{{ route('admin.produits.index') }}"><span class="admin-nav-icon">◇</span><span>Produits</span></a>
+  <a class="admin-nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}"><span class="admin-nav-icon">▤</span><span>Catégories de Produits</span></a>
   <a class="admin-nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}" href="{{ route('admin.orders.index') }}"><span class="admin-nav-icon">▣</span><span>Commandes</span></a>
   <a class="admin-nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}" href="{{ route('admin.settings.edit') }}"><span class="admin-nav-icon">⇄</span><span>Paramètres & paiements</span></a>
   <p class="admin-label">PERSONNALISATION DU SITE</p>
@@ -29,5 +29,5 @@
  @if($errors->any())<div class="flash error">{{ $errors->first() }}</div>@endif
  @yield('content')
  </main>
- <script src="{{ asset('js/sadja.js') }}" defer></script>
+ <script src="{{ asset('js/CPC.js') }}" defer></script>
 </body></html>

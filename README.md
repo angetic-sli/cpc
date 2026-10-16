@@ -1,6 +1,6 @@
-# SADJA — plateforme e-commerce Laravel
+# CPC — plateforme e-commerce Laravel
 
-Projet de démarrage Laravel pour une boutique SADJA, avec une interface boutique inspirée de l'architecture visuelle du site de référence (grandes images, navigation par univers, fiches produits, panier, compte client) et un back-office de gestion.
+Projet de démarrage Laravel pour une boutique CPC, avec une interface boutique inspirée de l'architecture visuelle du site de référence (grandes images, navigation par univers, fiches produits, panier, compte client) et un back-office de gestion.
 
 > Important : l'archive de référence fournie est un miroir HTML HTTrack, pas une sauvegarde WordPress. Ce projet reconstruit les fonctionnalités dans Laravel ; il ne reprend pas le backend WooCommerce et ne peut pas importer automatiquement commandes, comptes ou paiements de l'ancien site.
 
@@ -16,17 +16,17 @@ Projet de démarrage Laravel pour une boutique SADJA, avec une interface boutiqu
 1. Installer PHP 8.2+, Composer, Node.js et MySQL.
 2. Créer une application Laravel :
    ```bash
-   composer create-project laravel/laravel sadja
+   composer create-project laravel/laravel CPC
    ```
 3. Copier le contenu de cette archive dans la racine du projet Laravel en fusionnant les dossiers.
 4. Configurer `.env` :
    ```env
-   APP_NAME=SADJA
+   APP_NAME=CPC
    APP_URL=http://127.0.0.1:8000
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
-   DB_DATABASE=sadja
+   DB_DATABASE=CPC
    DB_USERNAME=root
    DB_PASSWORD=
    ```
@@ -44,7 +44,7 @@ Projet de démarrage Laravel pour une boutique SADJA, avec une interface boutiqu
 
 ## Compte administrateur de démonstration
 Le seeder crée :
-- Email : `admin@sadja.local`
+- Email : `admin@CPC.local`
 - Mot de passe : `ChangeMe123!`
 
 **Changez immédiatement ce mot de passe avant toute mise en production.** Le compte de démonstration ne doit pas être utilisé sur un serveur public.
@@ -64,7 +64,7 @@ Le seeder crée :
 - Connecter un prestataire de paiement (CinetPay, PayDunya, Stripe ou autre) et vérifier les webhooks.
 - Configurer SMTP, politique de confidentialité, CGV, retours et livraison.
 - Ajouter tests automatisés, journalisation/monitoring, sauvegardes et limitation de débit.
-- Revoir le branding, les visuels et les textes SADJA. Les images de référence ne sont pas copiées automatiquement.
+- Revoir le branding, les visuels et les textes CPC. Les images de référence ne sont pas copiées automatiquement.
 - Vérifier la compatibilité de toutes les routes avec la version Laravel installée.
 
 ## Structure
@@ -72,7 +72,7 @@ Le seeder crée :
 - `app/Http/Controllers` : boutique, panier, compte, administration
 - `database/migrations` et `database/seeders`
 - `resources/views` : Blade storefront et back-office
-- `public/css/sadja.css`, `public/js/sadja.js`
+- `public/css/CPC.css`, `public/js/CPC.js`
 
 ## Mise à jour : paiement, livraison et sécurité
 
